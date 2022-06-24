@@ -1,24 +1,24 @@
+from json import load
+
 from pymongo import MongoClient
+from faker import Faker
+fake = Faker()
 
-####### Version 1
+print(fake.random.randint(1,18))
 
-# pprint library is used to make the output look more pretty
-from pprint import pprint
+with open('secrets.json', 'r') as secrets:
+    database_pass = load(secrets)["database_pass"]
 
-# connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
-# client = MongoClient(
-#     "mongodb+srv://lazystudent:CWDiyd7KRkdzLi0h@cluster0.4jo8n.mongodb.net/?retryWrites=true&w=majority")
-# db = client.admin
-# print(client.server_info())
+# Ingest data
 
-# Issue the serverStatus command and print the results
+with open('data/courses.json', 'r') as secrets:
+    courses = load(secrets)["data"]
 
-# serverStatusResult = db.command("serverStatus")
-# pprint(serverStatusResult)
+# Database initialisation
 
-######## Version 2
+client = MongoClient(
+    f"mongodb+srv://lazystudent:{database_pass}@cluster0.4jo8n.mongodb.net/?retryWrites=true&w=majority")
 
+db = client.time_tracking  # defining the database
 
-client = MongoClient("mongodb+srv://lazystudent:CWDiyd7KRkdzLi0h@cluster0.4jo8n.mongodb.net/?retryWrites=true&w=majority")
-db = client.lazystudent
-print(client.server_info())
+# Insert local data into database
