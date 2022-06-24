@@ -6,6 +6,16 @@ The Lazy Student (LS) aims to determine whether a student used an online course 
 
 This is useful for the course manager/buyer at the point of issuing a receipt and certificate. It prevents a student receiving a certificate without completing the course and an institution paying for a course which was not completed.
 
+## Assumptions
+
+This service lives downstream from a web application for e-learning. 
+
+I assume the web application behaves in the following way:
+- user has to login in order to use the application
+- after n minutes the user is logged out
+- upon logout the client makes a call to the backend sending login timestamp (stored in some kind of session storage) and logout timestamp
+- in the backend the log is stored in Mongo DB
+
 ## Notes
 
 -   this is just an experiment / personal project currently under development
