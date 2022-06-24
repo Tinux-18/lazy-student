@@ -5,6 +5,7 @@ from faker import Faker
 
 with open('secrets.json', 'r') as secrets:
     database_pass = load(secrets)["database_pass"]
+    database_user = load(secrets)["database_user"]
 
 # Data ingestion
 
@@ -14,7 +15,7 @@ with open('data/courses.json', 'r') as secrets:
 # Database initialisation
 
 client = MongoClient(
-    f"mongodb+srv://lazystudent:{database_pass}@cluster0.4jo8n.mongodb.net/?retryWrites=true&w=majority")
+    f"mongodb+srv://{database_user}:{database_pass}@cluster0.4jo8n.mongodb.net/?retryWrites=true&w=majority")
 
 db = client.time_tracking
 
