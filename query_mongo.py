@@ -14,6 +14,7 @@ client = MongoClient(
 
 db = client.time_tracking
 
+
 def get_progress(student_name, course_id):
     course_obj_id = ObjectId(course_id)
     return db.timelog.aggregate(
@@ -74,3 +75,20 @@ def get_progress(student_name, course_id):
             }
         ]
     )
+
+
+def get_courses():
+    items = []
+    cursor = db.courses.find({}, {"_id": 0, "title": 1})
+    for i in cursor:
+        items.append(i["title"])
+    return items
+
+
+def get_students():
+    items = []
+    cursor = db.timelog.find({}, {"_id": 0, "name": 1})
+    for i in cursor:
+        if i["name"] not in items:
+            items.append(i["name"])
+    return items
