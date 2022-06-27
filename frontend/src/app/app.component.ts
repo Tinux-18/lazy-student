@@ -1,25 +1,24 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import {ProgressCheckApiService} from './progress_check/progress_check_api.service';
-
-import {Exam} from './exams/exam.model';
+import {Subscription} from 'rxjs';
+import {ProgressCheckApiService} from './progess_check/progress_check_api.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
-  examsListSubs: Subscription;
-  examsList: Exam[];
+  listSubs: Subscription|undefined;
+  examsList: []|undefined;
 
-  constructor(private examsApi: ProgressCheckApiService) {
+  constructor(private progressCheckApi: ProgressCheckApiService) {
   }
 
   ngOnInit() {
-    this.examsListSubs = this.examsApi
-      .getExams()
+    this.listSubs = this.progressCheckApi
+      .getStudents()
       .subscribe(res => {
           this.examsList = res;
         },
@@ -28,6 +27,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.examsListSubs.unsubscribe();
+    this.listSubs.unsubscribe();
   }
 }
