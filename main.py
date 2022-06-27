@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
-
-from query_mongo import get_progress
+from json import dumps
+from query_mongo import get_progress, get_students, get_courses
 
 # Building Flask
 
@@ -11,12 +11,10 @@ CORS(app)
 
 @app.route('/')
 def get_lists():
-    print("get me")
-    # minutes = get_progress("Samuel Cochran", "62b707d4e700f67ac1e2eff7")._CommandCursor__data[0]
+    return dumps({"courses": get_courses(), "students": get_students()})
 
-
-@app.route('/', methods=['POST'])
-def get_progress():
-    variable_name = request.args.get('student')
-    print(variable_name)
-    # minutes = get_progress("Samuel Cochran", "62b707d4e700f67ac1e2eff7")._CommandCursor__data[0]
+@app.route('/get-progress')
+def get_student_progress():
+    progress = get_progress(request.args.get("student"), request.args.get("course_id"))._CommandCursor__data[0]
+    print(progress)
+    return dumps({"student": request.args.get("student"), "course": progress["course"]["title"], "progress": f'{progress["progress"]} %'})
