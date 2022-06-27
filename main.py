@@ -1,6 +1,7 @@
 from json import load
 from pprint import pprint
 
+from bson import ObjectId
 from pymongo import MongoClient
 
 with open('secrets.json', 'r') as secrets_json:
@@ -15,10 +16,14 @@ client = MongoClient(
 
 db = client.time_tracking
 
+target_student_name = "Samuel Cochran"
+target_course_id = ObjectId("62b707d4e700f67ac1e2eff7")
+
 #Find out minutes logged
 
 minutes = db.timelog.aggregate(
     [
+    {'$match': {'name': target_student_name, 'course_id': target_course_id}},
        {
           "$group":
              {
@@ -34,7 +39,7 @@ minutes = db.timelog.aggregate(
                                 {
                                     "startDate": "$login",
                                     "endDate": "$logout",
-                                    "unit": "hour"
+                                    "unit": "minute"
                                 }
                            }
                     }
@@ -46,21 +51,30 @@ minutes = db.timelog.aggregate(
                     "from": "courses",
                     "localField": "_id.course_id",
                     "foreignField": "_id",
-                    "as": "course_name"
+                    "as": "course"
                 }
         },
 {
-    "$unwind": "$course_name"
+    "$unwind": "$course"
 },
 {
         "$project": {
           "_id": 1,
           "name": 1,
-          "averageTime": {
+          "averageHours": {
                       "$divide": [ "$averageTime", 60 ]
                    },
-          "course_name.title": 1,
-        "course_name.duration": 1,
+          "course.title": 1,
+          "course.duration": 1,
+          "progress": {"$divide": [
+                        {"$multiply": [
+                            {"$divide": [
+                                "$averageTime",
+                                60]
+                            },
+                            100]
+                        },
+                        "$course.duration"]}
         }
       }
     ]
@@ -68,5 +82,3 @@ minutes = db.timelog.aggregate(
 
 for x in minutes:
     print(x)
-
-# TODO filter by target student and course and return precentage
