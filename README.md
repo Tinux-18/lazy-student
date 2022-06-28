@@ -38,16 +38,16 @@ I assume the web application behaves in the following way:
 -->
 ## Techstack
 
-### Front-end
-
-![](https://img.shields.io/badge/-Angular-DD0031?logo=react&logoColor=white)&nbsp;![](https://img.shields.io/badge/-ReactiveX-B7178C?logo=redux&logoColor=white)
-
 ### Back-end
 
 ![](https://img.shields.io/badge/-Python-3776AB?logo=Node.js&logoColor=white)
+![](https://img.shields.io/badge/-MongoDB-7A248?logo=PostgreSQL&logoColor=white)
+![](https://img.shields.io/badge/-Flask-000000?logo=Flask&logoColor=white) 
 
-![](https://img.shields.io/badge/-MongoDB-7A248?logo=PostgreSQL&logoColor=white) 
+### Front-end
 
+![](https://img.shields.io/badge/-Angular-DD0031?logo=react&logoColor=white)
+![](https://img.shields.io/badge/-ReactiveX-B7178C?logo=redux&logoColor=white)
 <!--
 ## Features
 
