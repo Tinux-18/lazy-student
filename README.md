@@ -1,5 +1,7 @@
 # the Lazy Student
 
+## Status - Under development 
+
 ## Progress
 
 - [x] Set-up Mongo in Atlas
@@ -24,10 +26,10 @@ I assume the web application behaves in the following way:
 - upon logout the client makes a call to the backend sending login timestamp (stored in some kind of session storage) and logout timestamp
 - in the backend the log is stored in Mongo DB
 
+<!--
+
 ## Notes
 
--   this is just an experiment / personal project currently under development
-<!--
 ## Tried it yourself locally
 
 **Requirements**: git, node, npm, postgreSQL, redis
