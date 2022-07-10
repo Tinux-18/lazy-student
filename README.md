@@ -1,5 +1,14 @@
 # the Lazy Student
 
+## Progress
+
+Back-end
+- [x] Set-up Mongo in Atlas
+- [x] Generate mock data
+- [x] Set-up flask to run Python back-end
+- [x] Query Mongo for course progression
+- [ ] Set-up Angular front-end to display query results
+
 ## Overview
 
 The Lazy Student (LS) aims to determine whether a student used an online course for the required time to graduate.
