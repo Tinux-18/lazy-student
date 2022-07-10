@@ -2,7 +2,6 @@
 
 ## Progress
 
-Back-end
 - [x] Set-up Mongo in Atlas
 - [x] Generate mock data
 - [x] Set-up flask to run Python back-end
